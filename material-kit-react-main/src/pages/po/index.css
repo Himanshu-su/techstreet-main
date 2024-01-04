@@ -1,0 +1,200 @@
+.card{
+    width: 50%;
+    height: 300px;
+    margin: 10% 0px 0px 25%;
+}
+/* subpurchase */
+footer {
+    position: sticky;
+    background-color: white;
+    color: black;
+    width: 100%;
+    padding: 20px 0;
+
+  }
+  
+  .footer-content {
+    max-width: 1400px; /* Set a maximum width for the content within the footer */
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    padding: 0px 30px 0px 30px;
+
+    /* Center the content horizontally */
+  }
+  .footer-content:hover{
+    color: blue;
+  }
+/* media for card */
+@media (max-width:998px){
+    .profile{
+        margin-left: 35px;
+    }
+}
+
+@media (max-width:600px ){
+    .card{
+        width: 300px;
+        height: 300px;
+       /* border: 2px solid red; */
+       margin: auto;
+       margin-top: 20%;
+    }
+
+    @media (max-width:600px ){
+        #drndiv{
+            display: grid;
+            grid-template-columns: auto auto auto auto;
+            grid-template-rows: 1fr;
+            gap: 20px;
+            justify-content: space-evenly;
+            margin-top: 30px;
+            margin-bottom: 30px;
+        }
+    }}
+    
+/* drndetail css */
+   .border{
+    height: 100px;
+    border-radius: 10%;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Adjust shadow as needed */
+    margin-right: 10px;
+   }
+    #col1{
+      
+        text-align:center ;
+        background-color:#e2e8f0;
+     
+        color:#061B64 ;
+       
+    }
+    #col2{
+      
+        text-align:center ;
+        background-color:#D0F2FF;
+        color:#061B64
+       
+    }
+    #col3{
+      
+        text-align:center ;
+        background-color:#FFF7CD;
+        color:#7A4F01
+       
+    }
+    #col4{
+      
+        text-align:center ;
+        color:#7A4F01;
+        background-color:#FFE7D9
+       
+    }
+    #col5{
+      
+        text-align:center ;
+        background-color:#2ecc71;
+        color:white
+       
+    }
+    #col6{
+      
+        text-align:center ;
+        color:#7A0C2E;
+      background-color:#FFE7D9
+       
+    }
+  
+    .border {
+        border-radius: 5%;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        margin-right: 10px;
+      }
+      
+      #col1, #col2, #col3, #col4, #col5, #col6 {
+        text-align: center;
+        margin-bottom: 20px; /* Adjust as needed */
+        padding: 15px;
+        display: flex;
+        flex-direction: column;
+      
+
+        /* Adjust as needed */
+      }
+      
+      #col1 {
+        background-color: #e2e8f0;
+        color: #061b64;
+        padding-top: 10px;
+
+      }
+      
+      #col2 {
+        background-color: #d0f2ff;
+        color: #061b64;
+      }
+      
+      #col3 {
+        background-color: #fff7cd;
+        color: #7a4f01;
+      }
+      
+      #col4 {
+        background-color: #ffe7d9;
+        color: #7a4f01;
+      }
+      
+      #col5 {
+        background-color: #2ecc71;
+        color: white;
+      }
+    
+      #col6 {
+        background-color: #ffe7d9;
+        color: #7a0c2e;
+      }
+      #storedPurchaseDatadrndetail{
+        width: 20%;
+        display:flex;
+      justify-content: space-between;
+      margin-left: 16px;
+    
+      }
+      #storedPurchaseDatadrndetailicon{
+color: #18dcff;
+margin-top: 5px;
+      }
+      #subheadingmaindetail{
+        margin-top: -8px;
+      }
+      #subheadingdetail{
+margin-top: -5px;
+font-size: 13px;
+
+      }
+      #drnattachment{
+        width: 50%;
+      }
+      #downloaddrndetail{
+height: 70px;
+box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+margin-right: 10px;
+padding-left: 20px;
+/* background-color: #d0f2ff;
+color: #061b64; */
+background-color: #fff7cd;
+color: #7a4f01;
+margin-bottom: 30px;
+      }
+      .downloadinvoicemain{
+        padding-top: 5px;
+    
+      }
+#subheadingdowndetail{
+  margin-top: -5px;
+font-size: 13px;
+/* margin-left: 20px; */
+}
+/* schedule page css */
+.btn-hover:hover {
+  background-color: #1855a1;
+}
