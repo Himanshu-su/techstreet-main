@@ -25,6 +25,15 @@ footer {
   .footer-content:hover{
     color: blue;
   }
+  /* media query for subpurchase */
+  @media screen and (max-width: 600px) {
+#cardfor8div{
+margin-left: -30px;
+border: 1px solid red;
+}
+   
+}
+
 /* media for card */
 @media (max-width:998px){
     .profile{
@@ -198,3 +207,72 @@ font-size: 13px;
 .btn-hover:hover {
   background-color: #1855a1;
 }
+
+/* profilepage  */
+/* .card {
+  display: flex;
+  width: 100%;
+  border: 1px solid #ccc;
+} */
+#cardprofile{
+  display: flex;
+  width: 100%;
+  /* border: 1px solid #ccc; */
+}
+
+.left {
+  width: 30%;
+}
+
+.left-inner {
+  width: 100%;
+  /* background-color: #f0f0f0; */
+  text-align: center;
+}
+
+.profile-img {
+  width: 150px; /* Adjust as needed */
+  height: 150px; /* Adjust as needed */
+  border-radius: 50%;
+  margin: 10px;
+}
+
+.right {
+  width: 70%;
+  padding: 10px;
+}
+
+.right-item {
+  margin-bottom: 10px;
+}
+.withMargin {
+  margin-bottom: 10px; /* Adjust the margin as per your design */
+}
+
+@media screen and (max-width: 600px) {
+  /* Styles for screens with a maximum width of 600 pixels */
+  #cardprofile{
+    margin-left: 40px;
+  }
+  #Nameicon{
+    width: 300px;
+/* border:1px solid red; */
+padding-left: 50px;
+margin-left: 10px;
+margin-top: -20px;
+  }
+  #detailmediarow{
+    margin-left: 50px;
+  }
+  #detailmediacol{
+    margin-top: 10px;
+    margin-bottom: 5px;
+    
+  }
+  #alldivcol{
+  
+    margin-left: -150px;
+  }
+ 
+}
+

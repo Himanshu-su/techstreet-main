@@ -17,7 +17,8 @@ import TableRow from '@mui/material/TableRow';
 import './index.css'
 import { useAuthContext } from '../AuthProvider';
 import { Button, Card, TableHead, Typography } from '@mui/material';
-import { Link, useLocation, useNavigate, useParams } from 'react-router-dom';
+import { Link, useLocation, useNavigate, useParams,useHistory, } from 'react-router-dom';
+
 
 const token = localStorage.getItem('token');
 
@@ -41,7 +42,8 @@ export const Calender = () => {
     const monthIndex = parseInt(index, 10);
     const navigate = useNavigate();
     const location = useLocation();
-    console.log(index)
+    // const history = useHistory(); 
+    console.log(`'useParam index':${index}`)
     console.log(scheduleData);
   console.log(month)
   // console.log(realscheduleData)
@@ -83,26 +85,27 @@ export const Calender = () => {
         setDateRange(formattedDates)
         setMonth(response.data.months)
         
-      } catch (error) {
+      }
+       catch (error) {
         setError(error);
       }
     };
   
     useEffect(() => {
-      const id = purchaseid;
-      const defaultMonth = monthIndex !== undefined ? monthIndex : 0;
-      getSchedule({ po_id: id, selected_month: defaultMonth });
-    }, [monthIndex]);
-    
-    
-     
-      const handleButtonClick = (type, selectedMonthIndex) => {
-        const selected_month = type === 'monthly' ? 0 : 1;
-      
-        // Fetch data with the updated selected_month value and selected month index
-        getSchedule({ po_id: purchaseid, selected_month, selected_month_index: selectedMonthIndex });
-      };
-    
+      const defaultMonth = index !== undefined ? parseInt(index, 10) : 0;
+      getSchedule({ po_id: purchaseid, selected_month: defaultMonth });
+      setCurrentMonthIndex(defaultMonth);
+    }, [purchaseid, index]);
+  
+    const handleButtonClick = (e,selectedMonthIndex) => {
+      e.preventDefault()
+      setCurrentMonthIndex(selectedMonthIndex);
+      getSchedule({ po_id: purchaseid, selected_month: selectedMonthIndex });
+      // Use navigate to navigate programmatically
+      navigate(`/dashboard/purchase/schedule/monthly/${selectedMonthIndex}`);
+    };
+  
+
     const handleArrowClick = (type) => {
         let newMonthIndex = currentMonthIndex;
     
@@ -259,45 +262,21 @@ export const Calender = () => {
           >
             <ArrowBackIcon />
           </Button>
-          {/* {month.length > 0 &&
-            month.map((month, index) => (
-              <div className="container" key={index} 
+          {month.length > 0 &&
+        month.map((monthItem, index) => (
+          <div className="container" key={index}>
+            <Typography variant="h5" gutterBottom>
+              <span
+                onClick={(e) => {
+                  handleButtonClick(e,index);
+                }}
+                style={{ cursor: 'pointer' }}
               >
-                <Typography variant="h5" gutterBottom>
-                  {month.monthrangeui}
-                </Typography>
-              </div>
-            ))} */}
-            {/* {month.length > 0 &&
-  month.map((month, index) => (
-    <div className="container" key={index}>
-      <Typography variant="h5" gutterBottom>
-      <Link to={`/dashboard/purchase/schedule/monthly/${index}`}>
-  {month.monthrangeui}
-</Link>
-
-
-      </Typography>
-    </div>
-  ))} */}
-{month.length > 0 &&
-  month.map((month, index) => (
-    <div className="container" key={index}>
-      <Typography variant="h5" gutterBottom>
-        <Link
-          to={`/dashboard/purchase/schedule/monthly/${index}`}
-          onClick={() => {
-            handleButtonClick('monthly', index);
-            navigate(`/dashboard/purchase/schedule/monthly/${index}`);
-          }}
-        >
-          {month.monthrangeui}
-        </Link>
-      </Typography>
-    </div>
-  ))}
-
-
+                {monthItem.monthrangeui}
+              </span>
+            </Typography>
+          </div>
+        ))}
           <Button
           //  onClick={() => handleArrowClick('forward')} 
           onClick={() => {
@@ -377,4 +356,7 @@ export const Calender = () => {
 
       </>
     );
-  };
+  }
+  // ;Dream Soft ;info@dreamssoftindia.com
+  // mak infotech mubmbai9029075525
+  // 8957060742

@@ -71,14 +71,14 @@ export default function Router() {
         
         {
           path: 'purchase/schedule',
-          element: <Navigate to="/dashboard/purchase/schedule/monthly/0" />,
+          element: <Navigate to="/dashboard/purchase/schedule/monthly" />,
           children: [
             {
               path: 'monthly/:index',
               element: <Calender />,
             },
             {
-              path: 'week/:index',
+              path: 'weekly/:index',
               element: <Calender />,
             },
           ],

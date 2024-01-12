@@ -20,7 +20,8 @@ import { useNavigate } from 'react-router-dom';
 // import { useTokenContext } from 'src/pages/TokenProvider';
 // import Typography from 'src/theme/overrides/Typography';
 
-const apiUrl = 'https://dev.techstreet.in/vmsglen/public/api/vendor/products';
+const apiUrl = 'https://b1.techstreet.in/api/vendor/products';
+// const apiUrl = 'https://dev.techstreet.in/vmsglen/public/api/vendor/products';
 // const apiToken = '111|RkgcCuhjCl68Ebr0b0QTnh3OO9VarqHaUZPWEnj9';
 const itemsPerPage = 10;
  const  token = sessionStorage.getItem("token") 
