@@ -23,9 +23,10 @@ import { useAuthContext } from './pages/AuthProvider';
 import { Drnlist } from './pages/createDrn'
 import { Newdrn } from './pages/Newdrn';
 import { Footer } from './pages/Footer';
-import { CompanySelection } from './pages/Companyselection';
+ import { CompanySelection } from './pages/Companyselection';
 import { Drndetail } from './pages/po/drndetail';
 import { Calender } from './pages/po/calender';
+import { Drnconcern } from './pages/po/drnConcern';
 
 
 
@@ -53,6 +54,7 @@ export default function Router() {
         { path: 'delivery', element: <Delivery /> },
         { path: `purchase/product/`, element: <Subpurchase /> },
         { path: `purchase/schedule/monthly`, element: <Calender /> },
+        { path: `drnconcern`, element: <Drnconcern /> },
         
         // {
         //   path: 'purchase/schedule',

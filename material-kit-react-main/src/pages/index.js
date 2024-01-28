@@ -159,14 +159,16 @@ icon:<FileCopyIcon />
   },
   {
     title: 'DRN Concern',
-    path: '/404',
+    path: '/dashboard/drnconcern',
     icon:< AssignmentLateIcon/>,
+    component: RouterLink,
+    to: '/dashboard/drnconcern',
   },
-  {
-    title: 'Notification',
-    path: '/404',
-    icon:<NotificationsActiveIcon/>
-  },
+  // {
+  //   title: 'Notification',
+  //   path: '/404',
+  //   icon:<NotificationsActiveIcon/>
+  // },
   {
     title: 'Profile',
     path: '/dashboard/profile',

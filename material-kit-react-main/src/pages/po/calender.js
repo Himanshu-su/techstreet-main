@@ -18,12 +18,14 @@ import './index.css'
 import { useAuthContext } from '../AuthProvider';
 import { Button, Card, TableHead, Typography } from '@mui/material';
 import { Link, useLocation, useNavigate, useParams,useHistory, } from 'react-router-dom';
+import { Footer } from '../Footer';
 
 
 const token = localStorage.getItem('token');
 
 export const Calender = () => {
     const [scheduleData, setScheduleData] = useState(null);
+    const [qtySchedule,setqtySchedule]=useState([])
     const [realscheduleData, setRealScheduleData] = useState(null);
     const [itemName,setItemName] = useState(null);
     const [receivedqtyStatus,setreceivedQtyStatus] = useState(null);
@@ -36,6 +38,7 @@ export const Calender = () => {
     const [month,setMonth]=useState([])
     const [isDialogOpen, setIsDialogOpen] = useState(false);
     const [currentMonthIndex, setCurrentMonthIndex] = useState(0);
+    const [selectedMonthRangeUI, setSelectedMonthRangeUI] = useState('');
     const purchaseid = localStorage.getItem('purchaseId');
     const { index } = useParams();
     // Convert the index to a number
@@ -59,7 +62,7 @@ export const Calender = () => {
       try {
         const response = await axios.post(
           `${apiUrl}/${stype}-schedule`,
-          params,
+      {...params,daterange:params.dateRange},
           {
             headers: {
               Authorization: `Bearer ${token}`,
@@ -76,13 +79,13 @@ export const Calender = () => {
         setremainingQtyStatus(response.data.schedule[0].qty_status.remaining_qty)
         setitemSchedule(response.data.schedule[0].schedule_qty.item_schedule )
         setorederQty(response.data.schedule[0].schedule_qty.ordered_qty)
-
-        const formattedDates = response.data.months[0].daterange.map((dateString) => {
-          const dateObject = new Date(dateString);
-          return `${dateObject.getDate()}-${dateObject.getMonth() + 1}-${dateObject.getFullYear()}`;
-        });
+        setqtySchedule(data.schedule[0].qty_schedule)
+        // const formattedDates = response.data.months[0].daterange.map((dateString) => {
+        //   const dateObject = new Date(dateString);
+        //   return `${dateObject.getDate()}-${dateObject.getMonth() + 1}-${dateObject.getFullYear()}`;
+        // });
     
-        setDateRange(formattedDates)
+        // setDateRange(formattedDates)
         setMonth(response.data.months)
         
       }
@@ -97,35 +100,65 @@ export const Calender = () => {
       setCurrentMonthIndex(defaultMonth);
     }, [purchaseid, index]);
   
-    const handleButtonClick = (e,selectedMonthIndex) => {
-      e.preventDefault()
-      setCurrentMonthIndex(selectedMonthIndex);
-      getSchedule({ po_id: purchaseid, selected_month: selectedMonthIndex });
-      // Use navigate to navigate programmatically
-      navigate(`/dashboard/purchase/schedule/monthly/${selectedMonthIndex}`);
-    };
   
+    const handleButtonClick = (e, selectedMonthIndex) => {
+      e.preventDefault();
+  
+     
+      let newMonthIndex = selectedMonthIndex;
 
-    const handleArrowClick = (type) => {
-        let newMonthIndex = currentMonthIndex;
+  
     
-        if (type === 'backward' && currentMonthIndex > 0) {
-          newMonthIndex = currentMonthIndex - 1;
-        } else if (type === 'forward' && currentMonthIndex < month.length - 1) {
-          newMonthIndex = currentMonthIndex + 1;
-        }
+      // Fetch data with the updated selected_month value
+      getSchedule({ po_id: localStorage.getItem('purchaseId'), selected_month: newMonthIndex })
+        .then(response => {
+          // Update currentMonthIndex and dateRange states
+          setCurrentMonthIndex(newMonthIndex);
     
-        // Fetch data with the updated selected_month value
-        getSchedule({ po_id: localStorage.getItem('purchaseId'), selected_month: newMonthIndex });
-        setCurrentMonthIndex(newMonthIndex);
+          const selectedMonth = month[newMonthIndex];
+          const daterange = selectedMonth ? selectedMonth.daterange : [];
+          const formattedDates = daterange.map((dateString) => {
+            const dateObject = new Date(dateString);
+            return `${dateObject.getDate()}-${dateObject.getMonth() + 1}-${dateObject.getFullYear()}`;
+          });
+          setDateRange(formattedDates);
+        })
+        .catch(error => {
+          console.error('Error fetching data:', error);
+        });
+    };
+    
+
+    const handleArrowClick = (e,type) => {
+      e.preventDefault();
+      let newMonthIndex = currentMonthIndex;
+
+      if (type === 'backward' && currentMonthIndex > 0) {
+        newMonthIndex = currentMonthIndex - 1;
+      } else if (type === 'forward' && currentMonthIndex < month.length - 1) {
+        newMonthIndex = currentMonthIndex + 1;
+      }
+    
+      // Fetch data with the updated selected_month value
+      getSchedule({ po_id: localStorage.getItem('purchaseId'), selected_month: newMonthIndex })
+        .then(response => {
+          // Update currentMonthIndex and dateRange states
+          setCurrentMonthIndex(newMonthIndex);
+    
+          const selectedMonth = month[newMonthIndex];
+          const daterange = selectedMonth ? selectedMonth.daterange : [];
+          const formattedDates = daterange.map((dateString) => {
+            const dateObject = new Date(dateString);
+            return `${dateObject.getDate()}-${dateObject.getMonth() + 1}-${dateObject.getFullYear()}`;
+          });
+          setDateRange(formattedDates);
+        })
+        .catch(error => {
+          console.error('Error fetching data:', error);
+        });
       };
     
-      const handleShowButtonClick = () => {
-        setIsDialogOpen(true);
-      };
-      const handleDialogClose = () => {
-        setIsDialogOpen(false);
-      };
+  
 
     // Render your component with the fetched data
     return (
@@ -173,19 +206,23 @@ export const Calender = () => {
                   </div>
                 </div>
                 <div className="col-md-3">
-                  <div className="border p-3" id='col2'>
+                  <div className="border p-4" id='col2'>
                     <h5> {item.total_products}</h5>
                     <h5 id='subheadingdetail'>Products</h5>
                   </div>
                 </div>
-                <div className="col-md-3">
-                  <div className="border p-4" id='col3'>
+                <div className="col-md-3" >
+                  <div className="border" id='col3' 
+                  style={{
+                    paddingTop:'32px'
+                  }}
+                  >
                     <h5 id='subheadingmaindetail'>{item.issue_date}</h5>
                     <h5 id='subheadingdetail'>Issue Date</h5>
                   </div>
                 </div>
                 <div className="col-md-3">
-                  <div className="border p-3" id='col4'>
+                  <div className="border p-4" id='col4'>
                     <h5>{item.validity}</h5>
                     <h5 id='subheadingdetail'>Validity</h5>
                   </div>
@@ -194,7 +231,7 @@ export const Calender = () => {
               {/* 2nd row */}
               <div className="row">
                 <div className="col-md-3">
-                  <div className="border p-3" id='col5'>
+                  <div className="border p-4" id='col5'>
                     <h5>{item.status}</h5>
                     <h5 id='subheadingdetail'>Status</h5>
                   </div>
@@ -242,7 +279,7 @@ export const Calender = () => {
               : 'transparent',
             color: location.pathname.includes('week') ? 'white' : 'black',
           }}
-          onClick={() => handleButtonClick('weekly')}
+          onClick={(e) => handleButtonClick(e, 'weekly')}
         className='ms-3'
       >
         <EventNoteIcon style={{ marginRight: '5px' }} />
@@ -254,82 +291,80 @@ export const Calender = () => {
         width:'40%'
     }}>
           <Button 
+          className='ms-2'
           // onClick={() => handleArrowClick('backward')}
-          onClick={() => {
-            handleArrowClick('backward');
-            navigate(`/dashboard/purchase/schedule/monthly/${currentMonthIndex - 1}`);
+          onClick={(e) => {
+            handleArrowClick(e,'backward');
+            // navigate(`/dashboard/purchase/schedule/monthly/${currentMonthIndex - 1}`);
           }}
+          disabled={currentMonthIndex <= 0}
           >
             <ArrowBackIcon />
           </Button>
-          {month.length > 0 &&
-        month.map((monthItem, index) => (
-          <div className="container" key={index}>
-            <Typography variant="h5" gutterBottom>
-              <span
-                onClick={(e) => {
-                  handleButtonClick(e,index);
-                }}
-                style={{ cursor: 'pointer' }}
-              >
-                {monthItem.monthrangeui}
-              </span>
-            </Typography>
-          </div>
-        ))}
+   
+        
+        {month.length > 0 &&
+  month.map((monthItem, index) => (
+    <div className="container" style={{
+      // border:'1px solid red',
+      marginLeft:'10px'
+    }} key={index}>
+      <Typography variant="h5" gutterBottom>
+        <span
+          onClick={(e) => {
+            handleButtonClick(e, index);
+          }}
+          className={currentMonthIndex === index ? "activeMonth" : ""}
+          style={{ cursor: 'pointer' }}
+        >
+          {monthItem.monthrangeui}
+        </span>
+      </Typography>
+    </div>
+  ))}
+ 
+
           <Button
           //  onClick={() => handleArrowClick('forward')} 
-          onClick={() => {
-            handleArrowClick('forward');
-            navigate(`/dashboard/purchase/schedule/monthly/${currentMonthIndex + 1}`);
+          onClick={(e) => {
+            handleArrowClick(e,'forward');
+          
           }}
-           style={{
-            marginRight:'30px',
-            marginLeft:'25px'
-          }}>
-            <ArrowForwardIcon />
-          </Button>
-        </div>
-
-        {/* show table */}
-        <div className="d-flex flex-row align-items-center">
-          {/* ... (previous code) */}
-          <Button onClick={handleShowButtonClick} variant="outlined" color="primary" 
-          className=''
-          style={{
-            marginLeft:'40%',
-            marginTop:'30px',
-            marginBottom:'30px'
-          }}
-          >
-            Show Table
-          </Button>
-        </div>
-
+          //  style={{
+          //   marginRight:'30px',
        
-    </Card>
-    <Card>
-    <Dialog open={isDialogOpen} onClose={handleDialogClose} fullWidth maxWidth="lg">
-        <DialogTitle>View Table</DialogTitle>
-        <DialogContent>
-          <TableContainer >
+          // }}
+          disabled={currentMonthIndex >= month.length-1}
+          >
+            <ArrowForwardIcon 
+           
+            />
+          </Button>
+        </div>
+
+<div className='ms-3 me-3 mb-4 mt-4' >
+        <TableContainer style={{
+  borderRadius:'10px'
+}}>
             <Table>
-            <TableHead>
+<TableHead>
   <TableRow>
     <TableCell>Items</TableCell>
     <TableCell>Orederd Qty</TableCell>
     <TableCell>Pending Scheduled Qty</TableCell>
 
-    {dateRange && dateRange.map((date, index) => (
-      <TableCell key={index}>{date}</TableCell>
+
+    {qtySchedule && qtySchedule.map((date, index) => (
+      <TableCell key={index}>{date.label}</TableCell>
     ))}
+
   </TableRow>
 </TableHead>
 <TableBody>
   <TableCell>{itemName}</TableCell>
   <TableCell>{orderedQty}<br/>{itemSchedule}</TableCell>
   <TableCell>{remainingqtyStatus}/{receivedqtyStatus}</TableCell>
-  {dateRange.map((date, dateIndex) => (
+  {/* {qtySchedule.map((date, dateIndex) => (
             <TableCell key={dateIndex}>
               <input
                 type="text"
@@ -340,22 +375,47 @@ export const Calender = () => {
                 // Add any other input attributes or event handlers as needed
               />
             </TableCell>
-          ))}
+          ))} */}
+         {qtySchedule && qtySchedule.map((date, dateIndex) => (
+    <TableCell key={dateIndex}>
+      <input
+        type="text"
+        // Set the value based on your data object properties
+        style={{ width: '100px', height: '40px', border: '1px solid gray', borderRadius: '10px' }}
+        // Add any other input attributes or event handlers as needed
+      />    </TableCell>
+      ))}
+    
+
           </TableBody>
             </Table>
           </TableContainer>
-        </DialogContent>
-        <DialogActions>
-          <Button onClick={handleDialogClose} color="primary">
-            Close
+        
+          </div>
+
+        {/* show table */}
+        {/* <div className="d-flex flex-row align-items-center">
+
+          <Button onClick={handleShowButtonClick} variant="outlined" color="primary" 
+          className=''
+          style={{
+            marginLeft:'40%',
+            marginTop:'30px',
+            marginBottom:'30px'
+          }}
+          >
+            Show Table
           </Button>
-        </DialogActions>
-      </Dialog>
+        </div> */}
+
+       
     </Card>
+    <Footer/>
     
 
       </>
     );
+   
   }
   // ;Dream Soft ;info@dreamssoftindia.com
   // mak infotech mubmbai9029075525

@@ -420,6 +420,7 @@ selector:(row)=>row.product_name,
           marginLeft:'30px',
           marginBottom:'30px'
         }}
+       
         >
         DRN Overview
           </Typography>
@@ -430,6 +431,7 @@ selector:(row)=>row.product_name,
       marginLeft:'25px',
      // border:"1px solid lightblue",
     }}
+    className='me-3'
     >
       <Typography variant="h4" gutterBottom>
         {product.length > 0 && (
@@ -459,140 +461,126 @@ Test
         </h4>
         {/* media query */}
         
-        <div
-  style={{
-    display: 'grid',
-    gridTemplateColumns: 'repeat(4, 1fr)',
-    gap: '20px',
-    justifyContent: 'space-evenly',
-    marginTop: '30px',
-    marginBottom: '30px',
-    }
-  }
-  id='drndiv'
+        
+{/* boostrap */}
 
->
-  {/* all 8 div */}
-  {/* 1 */}
-  <div
-    style={{
+<div className='row  ms-3 me-3' style={{display:'flex'}}  >
+  {/* 1st */}
+  <div className="col-sm-3  mb-3 pb-3 me-2 " 
+  style={{
     //   border: "3px solid #9b59b6",
       borderRadius: '5%',
       fontSize: '17px',
       textAlign: 'center',
-      margin: '0 20px 0 20px',
+      // margin: '0 20px 0 20px',
       paddingTop: '25px',
-      
-    
+      // display: 'flex',
+      // flexDirection: 'column',
       boxShadow: 'rgba(99, 99, 99, 0.2) 0px 2px 8px 0px',
       backgroundColor:'#e2e8f0',
       color:'#061B64'
     }}
   >
-    <p style={{color:'#061B64'}}>{item.oid
-}</p>
+  <p style={{color:'#061B64'}}>{item.oid}</p>
     <p style={{ color:'#061B64', fontSize: '12px', margin: '-10px 0px 0px 0px' }}>Purchase Order Id</p>
   </div>
-  {/* 2 */}
-  <div
-    style={{
-    //   border: "1px solid lightblue",
+  {/* 2nd */}
+  <div className="col-sm-3 mb-3 me-2"
+  style={{
+    //   border: "3px solid #9b59b6",
       borderRadius: '5%',
       fontSize: '17px',
-      
-    
+      textAlign: 'center',
+      // margin: '0 20px 0 20px',
       paddingTop: '25px',
-      margin: '0 20px 0 20px',
+      display: 'flex',
+      flexDirection: 'column',
       boxShadow: 'rgba(99, 99, 99, 0.2) 0px 2px 8px 0px',
       backgroundColor:'#D0F2FF',
       color:'#061B64'
     }}
   >
-    <p style={{ textAlign: 'center' }}>{item.subsidiary_name}</p>
+   <p style={{ textAlign: 'center' }}>{item.subsidiary_name}</p>
     <p style={{ color:'#061B64', fontSize: '12px', textAlign: 'center', marginTop: '-15px' }}>Subsidiary</p>
   </div>
-  {/* 3 */}
-  <div
-    style={{
-        // width:"80%",
-        // height:"100px",
-        marginLeft:'20px',
-    //   border: "1px solid lightblue",
+  {/* 3rd */}
+  <div className="col-sm-3 mb-3 me-2"
+  style={{
+    //   border: "3px solid #9b59b6",
       borderRadius: '5%',
       fontSize: '17px',
- textAlign: 'center',
-      paddingTop: '30px',
+      textAlign: 'center',
+      // margin: '0 20px 0 20px',
+      paddingTop: '25px',
+      display: 'flex',
+      flexDirection: 'column',
       boxShadow: 'rgba(99, 99, 99, 0.2) 0px 2px 8px 0px',
       backgroundColor:'#FFF7CD',
       color:'#7A4F01'
     }}
   >
-    <p> {item.location_name}
-    </p>
-    {/* {console.log('purchaseData:', purchaseData)
-
-}
-{
-  console.log('item:', item)
-}
-{
-  console.log('item.deliveries[0]:', item.deliveries[0])
-} */}
+    <p> {item.location_name}</p>
     <p style={{color:'#7A4F01', fontSize: '12px', marginTop: '-15px' }}>Location</p>
   </div>
-  {/* 4 */}
-  <div
-    style={{
-        // width:"60%",
-        // height:"100px",
-        marginLeft:'20px',
-    //   border: "1px solid lightblue",
+  {/* 4th */}
+  <div className="col-sm-2 ms-2 "
+  style={{
+    //   border: "3px solid #9b59b6",
       borderRadius: '5%',
       fontSize: '17px',
       textAlign: 'center',
+      // margin: '0 20px 0 20px',
+
       paddingTop: '25px',
+      // display: 'flex',
+      // flexDirection: 'column',
       boxShadow: 'rgba(99, 99, 99, 0.2) 0px 2px 8px 0px',
-      marginRight:'25px',
+      backgroundColor:'#FFE7D9',
       color:'#7A0C2E',
-     backgroundColor:'#FFE7D9'
-     
     }}
   >
     <p> {item.total_products}</p>
     <p style={{ color: 'gray', fontSize: '12px', marginTop: '-15px' }}>Products</p>
   </div>
-  {/* 5 */}
-  <div
-    style={{
-    //   border: "1px solid lightblue",
+</div>
+
+{/* 2nd row */}
+<div className='row mt-3 mb-3 ms-3 me-3' style={{display:'flex'}}>
+  {/* 1st */}
+  <div className="col-sm-3  mb-3 ms-2"
+  style={{
+    //   border: "3px solid #9b59b6",
       borderRadius: '5%',
       fontSize: '17px',
       textAlign: 'center',
-      paddingTop: '10px',
+      // margin: '0 20px 0 20px',
+      paddingTop: '25px',
+      // display: 'flex',
+      // flexDirection: 'column',
       boxShadow: 'rgba(99, 99, 99, 0.2) 0px 2px 8px 0px',
-      marginLeft:'25px',
       backgroundColor:'#2ecc71',
       color:'white'
     }}
   >
-
-    <p>
-    {/* {formatDateWithAMPM(item.deliveries[0].created_at)} */}
-    {/* {item.deliveries.length > 0 && formatDateWithAMPM(item.deliveries[0].created_at)} */}
+  
+     <p>
 {item.issue_date}
 </p>
 
 
     <p style={{   color:'white', fontSize: '12px', marginTop: '-15px' }}>Created at</p>
   </div>
-  {/* 6 */}
-  <div
-    style={{
-    //   border: "1px solid lightblue",
+  {/* 2nd */}
+  <div className="col-sm-3 mb-3 ms-2"
+  style={{
+    //   border: "3px solid #9b59b6",
       borderRadius: '5%',
       fontSize: '17px',
       textAlign: 'center',
-      paddingTop: '10px',
+      // margin: '0 20px 0 20px',
+      paddingTop: '25px',
+      display: 'flex',
+      flexDirection: 'column',
       boxShadow: 'rgba(99, 99, 99, 0.2) 0px 2px 8px 0px',
       color:'#7A0C2E',
       backgroundColor:'#FFE7D9'
@@ -604,14 +592,13 @@ Test
     </p>
     <p style={{   color:'#7A0C2E', fontSize: '12px', marginTop: '-15px' }}>Updated At</p>
   </div>
-  {/* 7 */}
-  
-</div>
+  </div>
 
 </div>
     
           ))
         )}
+        
       </Typography>
     </Card>
 

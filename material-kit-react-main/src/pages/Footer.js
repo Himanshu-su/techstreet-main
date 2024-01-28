@@ -7,6 +7,7 @@ export const Footer = () => {
      style={{
       marginTop:'5%'
     }}
+  
     >
     <div className="footer-content">
       <div>

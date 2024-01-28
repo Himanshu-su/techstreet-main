@@ -37,7 +37,7 @@ const UserPage = () => {
   const { setPurchaseId,apiUrl,purchaseId} = useAuthContext();
   const navigate=useNavigate()
 
-
+console.log(token)
   useEffect(() => {
     const fetchData = async (e) => {
       // e.preventDefault()

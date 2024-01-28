@@ -189,7 +189,9 @@ const handleClose = () => {
           marginLeft:'30px',
           marginBottom:'30px'
         }}
+          className='ms-3'
         >
+          
         Purchase Overview
           </Typography>
     <Card
@@ -200,6 +202,7 @@ const handleClose = () => {
       marginLeft:'25px',
      // border:"1px solid lightblue",
     }}
+    className='ms-2 '
     >
       <Typography variant="h4" gutterBottom >
         {products.length > 0 && (
@@ -235,9 +238,9 @@ Test
 
 {/* 1st row */}
 
-<div className='row  ' style={{display:'flex'}} >
+<div className='row  ' style={{display:'flex'}}  >
   {/* 1st */}
-  <div className="col-sm-3 me-3 " 
+  <div className="col-sm-3  mb-3 pb-3 me-2" 
   style={{
     //   border: "3px solid #9b59b6",
       borderRadius: '5%',
@@ -256,7 +259,7 @@ Test
     <p style={{ color:'#061B64', fontSize: '12px', margin: '-10px 0px 0px 0px' }}>Purchase Order Id</p>
   </div>
   {/* 2nd */}
-  <div className="col-sm-3 me-3"
+  <div className="col-sm-3 mb-3 me-2"
   style={{
     //   border: "3px solid #9b59b6",
       borderRadius: '5%',
@@ -275,7 +278,7 @@ Test
     <p style={{ color:'#061B64', fontSize: '12px', textAlign: 'center', marginTop: '-15px' }}>Subsidiary</p>
   </div>
   {/* 3rd */}
-  <div className="col-sm-3 me-3"
+  <div className="col-sm-3 mb-3 me-2"
   style={{
     //   border: "3px solid #9b59b6",
       borderRadius: '5%',
@@ -294,14 +297,14 @@ Test
     <p style={{color:'#7A4F01', fontSize: '12px', marginTop: '-15px' }}>Location</p>
   </div>
   {/* 4th */}
-  <div className="col-sm-2  "
+  <div className="col-sm-2 me-2 "
   style={{
     //   border: "3px solid #9b59b6",
       borderRadius: '5%',
       fontSize: '17px',
       textAlign: 'center',
       // margin: '0 20px 0 20px',
-      
+
       paddingTop: '25px',
       display: 'flex',
       flexDirection: 'column',
@@ -318,7 +321,7 @@ Test
 {/* 2nd row */}
 <div className='row mt-3 mb-3 ' style={{display:'flex'}}>
   {/* 1st */}
-  <div className="col-sm-3 me-3 "
+  <div className="col-sm-3  mb-3 me-2"
   style={{
     //   border: "3px solid #9b59b6",
       borderRadius: '5%',
@@ -337,7 +340,7 @@ Test
     <p style={{   color:'white', fontSize: '12px', marginTop: '-15px' }}>Total Amount</p>
   </div>
   {/* 2nd */}
-  <div className="col-sm-3 me-3"
+  <div className="col-sm-3 mb-3 me-2"
   style={{
     //   border: "3px solid #9b59b6",
       borderRadius: '5%',
@@ -356,7 +359,7 @@ Test
     <p style={{   color:'#7A0C2E', fontSize: '12px', marginTop: '-15px' }}>Issued</p>
   </div>
   {/* 3rd */}
-  <div className="col-sm-3 me-3"
+  <div className="col-sm-3 mb-3 me-2"
   style={{
     //   border: "3px solid #9b59b6",
       borderRadius: '5%',
@@ -375,7 +378,7 @@ Test
     <p style={{color:'white', fontSize: '12px', marginTop: '-15px' }}>Validity</p>
   </div>
   {/* 4th */}
-  <div className="col-sm-2  "
+  <div className="col-sm-2  mb-3 me-2"
   style={{
     //   border: "3px solid #9b59b6",
       borderRadius: '5%',
@@ -417,6 +420,8 @@ Test
    
      // border:"1px solid lightblue",
     }}
+    className='ms-2'
+    // className='purchaseorderdiv'
     >
 
       <div
@@ -426,14 +431,16 @@ Test
     justifyContent:'space-between',
 margin:'15px 25px 15px 25px'
       }}
+      // className='purchaseorderdiv'
       >
 <h4
+    // className='purchaseorderdiv'
 style={{
   fontFamily:'sans-serif,Public Sans'
 }}
 >Purchase Orders</h4>
 {/* drn btn */}
-<Link to={`/dashboard/profile/DRN/create`}><Button
+<Link to={`/dashboard/profile/DRN/create`}className='me-2'><Button
 >Create DRN</Button></Link>
 
 </div>
@@ -554,6 +561,7 @@ style={{
    
      // border:"1px solid lightblue",
     }}
+    className='ms-2'
     >
 
 <div style={{ display: 'flex', justifyContent: 'space-between', margin: '15px 25px 15px 25px' }}>
@@ -717,6 +725,7 @@ style={{
    
      // border:"1px solid lightblue",
     }}
+    className='ms-2'
     >
 
 <h4
@@ -769,9 +778,10 @@ style={{
         </Table>
                </TableContainer>
 </div>
+ 
     </Card>
-    {/* footer  */}
-<Footer/>
+   {/* footer  */}
+   <Footer  />
     </>
   );
 };

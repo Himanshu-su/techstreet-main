@@ -3,6 +3,16 @@
     height: 300px;
     margin: 10% 0px 0px 25%;
 }
+
+/* login form */
+/* @media screen and (max-width: 600px) {
+  #email {
+    width: 200px;
+    border: 1px solid red;
+  }
+} */
+
+
 /* subpurchase */
 footer {
     position: sticky;
@@ -30,6 +40,10 @@ footer {
 #cardfor8div{
 margin-left: -30px;
 border: 1px solid red;
+}
+#purchaseorderdiv{
+  margin-left: -20px;
+  border: 1px solid red;
 }
    
 }
@@ -274,5 +288,10 @@ margin-top: -20px;
     margin-left: -150px;
   }
  
+}
+/* calender page */
+.activeMonth{
+  color:blue;
+
 }
 

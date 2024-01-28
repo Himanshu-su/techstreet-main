@@ -102,6 +102,7 @@ export default function LoginForm () {
         // console.log('API Response:', response.data);
         // console.log('Login successful. Storing token in sessionStorage:', response.data.access_token);
        sessionStorage.setItem("token", response.data.access_token);
+      localStorage.setItem("token", response.data.access_token);
         // console.log(`token:${response.data.access_token}`)
         //  setToken(response.data.access_token)
         
@@ -133,30 +134,31 @@ export default function LoginForm () {
           <div>
             {/* <label htmlFor="html">HTML</label><br></br> */}
             <div><p>Email:</p></div>
-            <input
-              type="text"
-              id="email" 
-              // Add an 'id' attribute here
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              className='input'
-              placeholder='Enter Email'
-              style={{
-                width: '400px',
-                height: '50px',
-                border: '1px solid gray',
-                borderRadius: "5px",
-                marginTop: '5px',
-                 paddingLeft:"15px"
-              }}
-             
-              />
+            <div className='inputbox'>
+  <input
+    type="text"
+    id="email" // Add the 'id' attribute here
+    name="email"
+    value={formData.email}
+    onChange={handleChange}
+    className='input inputbox'
+    placeholder='Enter Email'
+    style={{
+      width: '350px',
+      height: '50px',
+      border: '1px solid gray',
+      borderRadius: "5px",
+      marginTop: '5px',
+      paddingLeft: "15px"
+    }}
+  />
+</div>
+
             <div className="error" style={{color:'red'}}>{errors.email}</div>
           </div><br />
           <div>
             <div><p>Password:</p></div>
-            <input
+            <input 
               type="password"
               id="password" // Add an 'id' attribute here
               name="password"
@@ -164,7 +166,7 @@ export default function LoginForm () {
               onChange={handleChange}
               placeholder='Enter Password'
               style={{
-                width: '400px',
+                width: '350px',
                 height: '50px',
                 border: '1px solid gray',
                 borderRadius: "5px",
@@ -178,7 +180,7 @@ export default function LoginForm () {
           <div>
             <button type="submit"
               style={{
-                width: '400px',
+                width: '350px',
                 height: '50px',
                 border: '2px solid blue',
                 borderRadius: "5px",
