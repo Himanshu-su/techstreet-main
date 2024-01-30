@@ -240,163 +240,183 @@ Test
 
 <div className='row  ' style={{display:'flex'}}  >
   {/* 1st */}
-  <div className="col-sm-3  mb-3 pb-3 me-2" 
-  style={{
-    //   border: "3px solid #9b59b6",
-      borderRadius: '5%',
-      fontSize: '17px',
-      textAlign: 'center',
-      // margin: '0 20px 0 20px',
-      paddingTop: '25px',
-      // display: 'flex',
-      // flexDirection: 'column',
-      boxShadow: 'rgba(99, 99, 99, 0.2) 0px 2px 8px 0px',
-      backgroundColor:'#e2e8f0',
-      color:'#061B64'
-    }}
+  <div className="col-sm-3 " 
+  // style={{
+  //   //   border: "3px solid #9b59b6",
+  //     borderRadius: '5%',
+  //     fontSize: '17px',
+  //     textAlign: 'center',
+  //     // margin: '0 20px 0 20px',
+  //     // paddingTop: '25px',
+  //     // display: 'flex',
+  //     // flexDirection: 'column',
+  //     boxShadow: 'rgba(99, 99, 99, 0.2) 0px 2px 8px 0px',
+  //     backgroundColor:'#e2e8f0',
+  //     color:'#061B64'
+  //   }}
   >
-  <p style={{color:'#061B64'}}>{item.oid}</p>
+    <div className="border p-4" id='col1'>
+  <p style={{color:'#061B64',fontSize:'20px'}}>{item.oid}</p>
     <p style={{ color:'#061B64', fontSize: '12px', margin: '-10px 0px 0px 0px' }}>Purchase Order Id</p>
-  </div>
+  </div></div>
   {/* 2nd */}
-  <div className="col-sm-3 mb-3 me-2"
-  style={{
-    //   border: "3px solid #9b59b6",
-      borderRadius: '5%',
-      fontSize: '17px',
-      textAlign: 'center',
-      // margin: '0 20px 0 20px',
-      paddingTop: '25px',
-      display: 'flex',
-      flexDirection: 'column',
-      boxShadow: 'rgba(99, 99, 99, 0.2) 0px 2px 8px 0px',
-      backgroundColor:'#D0F2FF',
-      color:'#061B64'
-    }}
-  >
-   <p style={{ textAlign: 'center' }}>{item.subsidiary_name}</p>
+  <div className="col-sm-3 "
+  // style={{
+  //     //  border: "3px solid #9b59b6",
+  //     borderRadius: '5%',
+  //     fontSize: '17px',
+  //     textAlign: 'center',
+  //     // margin: '0 20px 0 20px',
+  //     // marginRight:'-30px',
+  //     // marginLeft:'10px',
+  //     paddingTop: '25px',
+  //     display: 'flex',
+  //     flexDirection: 'column',
+  //     boxShadow: 'rgba(99, 99, 99, 0.2) 0px 2px 8px 0px',
+  //     backgroundColor:'#D0F2FF',
+  //     color:'#061B64'
+  //   }}
+   >
+   <div className="border p-2" id='col2'>
+   <p style={{ fontSize:'20px' }}>{item.subsidiary_name}</p>
     <p style={{ color:'#061B64', fontSize: '12px', textAlign: 'center', marginTop: '-15px' }}>Subsidiary</p>
-  </div>
+  </div></div>
   {/* 3rd */}
-  <div className="col-sm-3 mb-3 me-2"
-  style={{
-    //   border: "3px solid #9b59b6",
-      borderRadius: '5%',
-      fontSize: '17px',
-      textAlign: 'center',
-      // margin: '0 20px 0 20px',
-      paddingTop: '25px',
-      display: 'flex',
-      flexDirection: 'column',
-      boxShadow: 'rgba(99, 99, 99, 0.2) 0px 2px 8px 0px',
-      backgroundColor:'#FFF7CD',
-      color:'#7A4F01'
-    }}
+  <div className="col-sm-3 "
+  // style={{
+  //   //   border: "3px solid #9b59b6",
+  //     borderRadius: '5%',
+  //     fontSize: '17px',
+  //     textAlign: 'center',
+  //     // margin: '0 20px 0 20px',
+  //     paddingTop: '25px',
+  //     display: 'flex',
+  //     flexDirection: 'column',
+  //     boxShadow: 'rgba(99, 99, 99, 0.2) 0px 2px 8px 0px',
+  //     backgroundColor:'#FFF7CD',
+  //     color:'#7A4F01'
+  //   }}
   >
-    <p> {item.location_name}</p>
+   <div className="border p-4" id='col3'>
+    <p style={{
+      fontSize:'20px'
+    }}> {item.location_name}</p>
     <p style={{color:'#7A4F01', fontSize: '12px', marginTop: '-15px' }}>Location</p>
-  </div>
+  </div></div>
   {/* 4th */}
-  <div className="col-sm-2 me-2 "
-  style={{
-    //   border: "3px solid #9b59b6",
-      borderRadius: '5%',
-      fontSize: '17px',
-      textAlign: 'center',
-      // margin: '0 20px 0 20px',
-
-      paddingTop: '25px',
-      display: 'flex',
-      flexDirection: 'column',
-      boxShadow: 'rgba(99, 99, 99, 0.2) 0px 2px 8px 0px',
-      backgroundColor:'#FFE7D9',
-      color:'#7A0C2E',
-    }}
+  <div className="col-sm-2  "
+//   style={{
+//     //   border: "3px solid #9b59b6",
+//       borderRadius: '5%',
+//       fontSize: '17px',
+//       textAlign: 'center',
+//       // margin: '0 20px 0 20px',
+// height:'112px',
+//       paddingTop: '25px',
+//       display: 'flex',
+//       flexDirection: 'column',
+//       boxShadow: 'rgba(99, 99, 99, 0.2) 0px 2px 8px 0px',
+//       backgroundColor:'#FFE7D9',
+//       color:'#7A0C2E',
+//     }}
   >
-    <p> {item.total_products}</p>
+     <div className="border p-4" id='col4'>
+    <p style={{
+      fontSize:'20px'
+    }}> {item.total_products}</p>
     <p style={{ color: 'gray', fontSize: '12px', marginTop: '-15px' }}>Products</p>
-  </div>
+  </div></div>
 </div>
 
 {/* 2nd row */}
-<div className='row mt-3 mb-3 ' style={{display:'flex'}}>
-  {/* 1st */}
-  <div className="col-sm-3  mb-3 me-2"
-  style={{
-    //   border: "3px solid #9b59b6",
-      borderRadius: '5%',
-      fontSize: '17px',
-      textAlign: 'center',
-      // margin: '0 20px 0 20px',
-      paddingTop: '25px',
-      // display: 'flex',
-      // flexDirection: 'column',
-      boxShadow: 'rgba(99, 99, 99, 0.2) 0px 2px 8px 0px',
-      backgroundColor:'#2ecc71',
-      color:'white'
-    }}
+<div className='row  ' style={{display:'flex'}}>
+  {/* 5st */}
+  <div className="col-sm-3 "
+  // style={{
+  //   //   border: "3px solid #9b59b6",
+  //     borderRadius: '5%',
+  //     fontSize: '17px',
+  //     textAlign: 'center',
+  //     // margin: '0 20px 0 20px',
+  //     paddingTop: '25px',
+  //     // display: 'flex',
+  //     // flexDirection: 'column',
+  //     boxShadow: 'rgba(99, 99, 99, 0.2) 0px 2px 8px 0px',
+  //     backgroundColor:'#2ecc71',
+  //     color:'white'
+  //   }}
   >
-    <p> {item.total_amount}</p>
+         <div className="border p-4" id='col5'>
+    <p style={{
+      fontSize:'20px'
+    }}> {item.total_amount}</p>
     <p style={{   color:'white', fontSize: '12px', marginTop: '-15px' }}>Total Amount</p>
-  </div>
-  {/* 2nd */}
-  <div className="col-sm-3 mb-3 me-2"
-  style={{
-    //   border: "3px solid #9b59b6",
-      borderRadius: '5%',
-      fontSize: '17px',
-      textAlign: 'center',
-      // margin: '0 20px 0 20px',
-      paddingTop: '25px',
-      display: 'flex',
-      flexDirection: 'column',
-      boxShadow: 'rgba(99, 99, 99, 0.2) 0px 2px 8px 0px',
-      color:'#7A0C2E',
-      backgroundColor:'#FFE7D9'
-    }}
+  </div></div>
+  {/* 6nd */}
+  <div className="col-sm-3 "
+  // style={{
+  //   //   border: "3px solid #9b59b6",
+  //     borderRadius: '5%',
+  //     fontSize: '17px',
+  //     textAlign: 'center',
+  //     // margin: '0 20px 0 20px',
+  //     paddingTop: '25px',
+  //     display: 'flex',
+  //     flexDirection: 'column',
+  //     boxShadow: 'rgba(99, 99, 99, 0.2) 0px 2px 8px 0px',
+  //     color:'#7A0C2E',
+  //     backgroundColor:'#FFE7D9'
+  //   }}
   >
-    <p> {item.issue_date}</p>
+
+    <div className="border p-4" id='col6'><p style={{
+      fontSize:"20px"
+    }}> {item.issue_date}</p>
     <p style={{   color:'#7A0C2E', fontSize: '12px', marginTop: '-15px' }}>Issued</p>
-  </div>
-  {/* 3rd */}
-  <div className="col-sm-3 mb-3 me-2"
-  style={{
-    //   border: "3px solid #9b59b6",
-      borderRadius: '5%',
-      fontSize: '17px',
-      textAlign: 'center',
-      // margin: '0 20px 0 20px',
-      paddingTop: '25px',
-      display: 'flex',
-      flexDirection: 'column',
-      boxShadow: 'rgba(99, 99, 99, 0.2) 0px 2px 8px 0px',
-      backgroundColor:'#95a5a6',
-      color:'white'
-    }}
+  </div></div>
+  {/* 7rd */}
+  <div className="col-sm-3 "
+  // style={{
+  //   //   border: "3px solid #9b59b6",
+  //     borderRadius: '5%',
+  //     fontSize: '17px',
+  //     textAlign: 'center',
+  //     // margin: '0 20px 0 20px',
+  //     paddingTop: '25px',
+  //     display: 'flex',
+  //     flexDirection: 'column',
+  //     boxShadow: 'rgba(99, 99, 99, 0.2) 0px 2px 8px 0px',
+  //     backgroundColor:'#95a5a6',
+  //     color:'white'
+  //   }}
   >
+         <div className="border p-4 mb-3" id='col7'>
     <p> {item.validity}</p>
     <p style={{color:'white', fontSize: '12px', marginTop: '-15px' }}>Validity</p>
-  </div>
-  {/* 4th */}
-  <div className="col-sm-2  mb-3 me-2"
-  style={{
-    //   border: "3px solid #9b59b6",
-      borderRadius: '5%',
-      fontSize: '17px',
-      textAlign: 'center',
-      // margin: '0 20px 0 20px',
+  </div></div>
+  {/* 8th */}
+  <div className="col-sm-2 "
+  // style={{
+  //   //   border: "3px solid #9b59b6",
+  //     borderRadius: '5%',
+  //     fontSize: '17px',
+  //     textAlign: 'center',
+  //     // margin: '0 20px 0 20px',
       
-      paddingTop: '25px',
-      display: 'flex',
-      flexDirection: 'column',
-      boxShadow: 'rgba(99, 99, 99, 0.2) 0px 2px 8px 0px',
-      backgroundColor:'#e2e8f0',
-      color:'#061B64'
-    }}
+  //     paddingTop: '25px',
+  //     display: 'flex',
+  //     flexDirection: 'column',
+  //     boxShadow: 'rgba(99, 99, 99, 0.2) 0px 2px 8px 0px',
+  //     backgroundColor:'#e2e8f0',
+  //     color:'#061B64'
+  //   }}
   >
-    <p>{item.status}</p>
+    <div className="border p-4" id='col8'>
+    <p style={{
+      fontSize:'20px'
+    }}>{item.status}</p>
     <p style={{ color:'#061B64', fontSize: '12px', marginTop: '-15px' }}>Status</p>
-  </div>
+  </div></div>
 </div>
   {/* all 8 div */}
   {/* 1 */}

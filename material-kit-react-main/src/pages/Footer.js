@@ -5,9 +5,11 @@ export const Footer = () => {
   return (
     <footer
      style={{
-      marginTop:'5%'
+      marginTop:'5%',
+      marginLeft:'16px',
+     
     }}
-  
+    // className='ms-3'
     >
     <div className="footer-content">
       <div>

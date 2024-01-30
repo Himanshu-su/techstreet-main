@@ -26,8 +26,8 @@ const token = localStorage.getItem('token');
 export const Calender = () => {
     const [scheduleData, setScheduleData] = useState(null);
     const [qtySchedule,setqtySchedule]=useState([])
-    const [realscheduleData, setRealScheduleData] = useState(null);
-    const [itemName,setItemName] = useState(null);
+    const [realscheduleData, setRealScheduleData] = useState([]);
+    const [itemName,setItemName] = useState([]);
     const [receivedqtyStatus,setreceivedQtyStatus] = useState(null);
     const [remainingqtyStatus,setremainingQtyStatus] = useState(null);
     const [orderedQty,setorederQty]=useState(null)
@@ -74,11 +74,11 @@ export const Calender = () => {
         const dash = response.data.purchase_order
         setScheduleData([dash]);
         setRealScheduleData(response.data.schedule)
-        setItemName(response.data.schedule[0].items.product_name)
-        setreceivedQtyStatus(response.data.schedule[0].qty_status.received_qty)
-        setremainingQtyStatus(response.data.schedule[0].qty_status.remaining_qty)
-        setitemSchedule(response.data.schedule[0].schedule_qty.item_schedule )
-        setorederQty(response.data.schedule[0].schedule_qty.ordered_qty)
+        // setItemName(response.data.schedule)
+        // setreceivedQtyStatus(response.data.schedule[0].qty_status.received_qty)
+        // setremainingQtyStatus(response.data.schedule[0].qty_status.remaining_qty)
+        // setitemSchedule(response.data.schedule[0].schedule_qty.item_schedule )
+        // setorederQty(response.data.schedule[0].schedule_qty.ordered_qty)
         setqtySchedule(data.schedule[0].qty_schedule)
         // const formattedDates = response.data.months[0].daterange.map((dateString) => {
         //   const dateObject = new Date(dateString);
@@ -349,6 +349,7 @@ export const Calender = () => {
             <Table>
 <TableHead>
   <TableRow>
+  <TableCell>S.No</TableCell>
     <TableCell>Items</TableCell>
     <TableCell>Orederd Qty</TableCell>
     <TableCell>Pending Scheduled Qty</TableCell>
@@ -361,30 +362,35 @@ export const Calender = () => {
   </TableRow>
 </TableHead>
 <TableBody>
-  <TableCell>{itemName}</TableCell>
-  <TableCell>{orderedQty}<br/>{itemSchedule}</TableCell>
-  <TableCell>{remainingqtyStatus}/{receivedqtyStatus}</TableCell>
-  {/* {qtySchedule.map((date, dateIndex) => (
-            <TableCell key={dateIndex}>
-              <input
-                type="text"
-                // Set the value based on your data object properties
-                style={{ width: '100px', height: '40px',border:'1px solid gray'
-              ,borderRadius:'10px'
-              }}
-                // Add any other input attributes or event handlers as needed
-              />
-            </TableCell>
-          ))} */}
-         {qtySchedule && qtySchedule.map((date, dateIndex) => (
-    <TableCell key={dateIndex}>
-      <input
-        type="text"
-        // Set the value based on your data object properties
-        style={{ width: '100px', height: '40px', border: '1px solid gray', borderRadius: '10px' }}
-        // Add any other input attributes or event handlers as needed
-      />    </TableCell>
+{realscheduleData.map((item, index) => (
+    <TableRow key={index}>
+      <TableCell>{index+1}.</TableCell>
+      {/* First TableCell: Product Name */}
+      <TableCell>{item.items.product_name}</TableCell>
+
+      {/* Second TableCell: Ordered Qty and Item Schedule */}
+      <TableCell>
+        <div>{item.schedule_qty.ordered_qty}</div>
+        <div>{item.schedule_qty.item_schedule}</div>
+      </TableCell>
+
+      {/* Third TableCell: Remaining Qty / Received Qty */}
+      <TableCell>{item.qty_status.remaining_qty} / {item.qty_status.received_qty}</TableCell>
+
+      {/* Map over each date in qtySchedule and render input cells */}
+      {qtySchedule.map((date, dateIndex) => (
+        <TableCell key={dateIndex}>
+          <input
+            type="text"
+            // Set the value based on your data object properties
+            style={{ width: '100px', height: '40px', border: '1px solid gray', borderRadius: '10px' }}
+            // Add any other input attributes or event handlers as needed
+          />
+        </TableCell>
       ))}
+    </TableRow>
+  ))}
+       
     
 
           </TableBody>

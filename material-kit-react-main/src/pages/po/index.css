@@ -126,6 +126,20 @@ border: 1px solid red;
       background-color:#FFE7D9
        
     }
+    #col7{
+      
+      text-align:center ;
+      color:white;
+    background-color:#95a5a6
+     
+  }
+  #col8{
+      
+    text-align:center ;
+    color:#061B64;
+  background-color:#e2e8f0
+   
+}
   
     .border {
         border-radius: 5%;

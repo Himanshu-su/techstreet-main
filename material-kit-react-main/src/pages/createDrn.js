@@ -530,7 +530,7 @@ Test
       fontSize: '17px',
       textAlign: 'center',
       // margin: '0 20px 0 20px',
-
+      height:'112px',
       paddingTop: '25px',
       // display: 'flex',
       // flexDirection: 'column',
