@@ -303,9 +303,13 @@ margin-top: -20px;
   }
  
 }
-/* calender page */
+/* calender month page */
 .activeMonth{
   color:blue;
 
 }
+/* calender week page */
+.activeWeek{
+  color:blue;
 
+}

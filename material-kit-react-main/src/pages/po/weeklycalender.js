@@ -20,131 +20,129 @@ import { Button, Card, TableHead, Typography } from '@mui/material';
 import { Link, useLocation, useNavigate, useParams,useHistory, } from 'react-router-dom';
 import { Footer } from '../Footer';
 
-
 const token = localStorage.getItem('token');
 
-export const Calender = () => {
-    const [scheduleData, setScheduleData] = useState(null);
-    const [qtySchedule,setqtySchedule]=useState([])
-    const [realscheduleData, setRealScheduleData] = useState([]);
-   
-    const [dateRange,setDateRange]=useState([])
-    const [error, setError] = useState(null);
-    const { purchaseId, apiUrl } = useAuthContext();
-    const [month,setMonth]=useState([])
-    const [isDialogOpen, setIsDialogOpen] = useState(false);
-    const [currentMonthIndex, setCurrentMonthIndex] = useState(0);
-    const [selectedMonthRangeUI, setSelectedMonthRangeUI] = useState('');
-    const purchaseid = localStorage.getItem('purchaseId');
-    const { index } = useParams();
-    // Convert the index to a number
-    const monthIndex = parseInt(index, 10);
-    const navigate = useNavigate();
-    const location = useLocation();
-    // const history = useHistory(); 
-    console.log(`'useParam index':${index}`)
-    console.log(scheduleData);
-  console.log(month)
-  // console.log(realscheduleData)
+export const Weeklycalender = () => {
+  const [scheduleData, setScheduleData] = useState(null);
+  const [qtySchedule,setqtySchedule]=useState([])
+  const [realscheduleData, setRealScheduleData] = useState([]);
+ 
+  const [dateRange,setDateRange]=useState([])
+  const [error, setError] = useState(null);
+  const { purchaseId, apiUrl } = useAuthContext();
+  const [week,setWeek]=useState([])
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [currentWeekIndex, setCurrentWeekIndex] = useState(0);
+  const [selectedWeekRangeUI, setSelectedWeekRangeUI] = useState('');
+  const purchaseid = localStorage.getItem('purchaseId');
+  const { index } = useParams();
+  // Convert the index to a number
+  const weekIndex = parseInt(index, 10);
+  const navigate = useNavigate();
+  const location = useLocation();
+  // const history = useHistory(); 
+  console.log(`'useParam index':${index}`)
+  console.log(scheduleData);
+console.log(week)
+// console.log(realscheduleData)
 
 
-    // Simulate API call
-    const getSchedule = async (params, stype='monthly' ) => {
-      try {
-        const response = await axios.post(
-          `${apiUrl}/${stype}-schedule`,
-      {...params,daterange:params.dateRange},
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
-        const data = response.data;
-        console.log(data)
-        const dash = response.data.purchase_order
-        setScheduleData([dash]);
-        setRealScheduleData(response.data.schedule)
-       
-        setqtySchedule(data.schedule[0].qty_schedule)
-       
-        setMonth(response.data.months)
-        
-      }
-       catch (error) {
-        setError(error);
-      }
+  // Simulate API call
+  const getSchedule = async (params, stype='weekly' ) => {
+    try {
+      const response = await axios.post(
+        `${apiUrl}/${stype}-schedule`,
+    {...params,daterange:params.dateRange},
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+      const data = response.data;
+      console.log(data)
+      const dash = response.data.purchase_order
+      setScheduleData([dash]);
+      setRealScheduleData(response.data.schedule)
+     
+      setqtySchedule(data.schedule[0].qty_schedule)
+     
+      setWeek(response.data.weeks)
+      
+    }
+     catch (error) {
+      setError(error);
+    }
+  };
+
+  useEffect(() => {
+    const defaultweek = index !== undefined ? parseInt(index, 10) : 0;
+    getSchedule({ po_id: purchaseid, selected_week: defaultweek });
+    setCurrentWeekIndex(defaultweek);
+  }, [purchaseid, index]);
+
+
+  const handleButtonClick = (e, selectedWeekIndex, stype) => {
+    e.preventDefault();
+    console.log(selectedWeekIndex)
+    let newWeekIndex = selectedWeekIndex;
+  
+    // Fetch data with the updated selected_Week value and stype
+    getSchedule({ po_id: localStorage.getItem('purchaseId'), selected_week: newWeekIndex }, stype)
+      .then(response => {
+     
+        setCurrentWeekIndex(newWeekIndex);
+    
+        const selectedWeek = week[newWeekIndex];
+        const daterange = selectedWeek ? selectedWeek.daterange : [];
+        const formattedDates = daterange.map((dateString) => {
+          const dateObject = new Date(dateString);
+          return `${dateObject.getDate()}-${dateObject.getMonth() + 1}-${dateObject.getFullYear()}`;
+        });
+        setDateRange(formattedDates);
+      })
+      .catch(error => {
+        console.error('Error fetching data:', error);
+      });
+  };
+
+
+  
+
+  const handleArrowClick = (e,type) => {
+    e.preventDefault();
+    let newWeekIndex = currentWeekIndex;
+
+    if (type === 'backward' && currentWeekIndex > 0) {
+      newWeekIndex = currentWeekIndex - 1;
+    } else if (type === 'forward' && currentWeekIndex < week.length - 1) {
+      newWeekIndex = currentWeekIndex + 1;
+    }
+  
+    // Fetch data with the updated selected_Week value
+    getSchedule({ po_id: localStorage.getItem('purchaseId'), selected_week: newWeekIndex })
+      .then(response => {
+        // Update currentWeekIndex and dateRange states
+        setCurrentWeekIndex(newWeekIndex);
+  
+        const selectedWeek = week[newWeekIndex];
+        const daterange = selectedWeek ? selectedWeek.daterange : [];
+        const formattedDates = daterange.map((dateString) => {
+          const dateObject = new Date(dateString);
+          return `${dateObject.getDate()}-${dateObject.getMonth() + 1}-${dateObject.getFullYear()}`;
+        });
+        setDateRange(formattedDates);
+      })
+      .catch(error => {
+        console.error('Error fetching data:', error);
+      });
     };
   
-    useEffect(() => {
-      const defaultMonth = index !== undefined ? parseInt(index, 10) : 0;
-      getSchedule({ po_id: purchaseid, selected_month: defaultMonth });
-      setCurrentMonthIndex(defaultMonth);
-    }, [purchaseid, index]);
-  
-    
-    const handleButtonClick = (e, selectedMonthIndex, stype) => {
-      e.preventDefault();
-    
-      let newMonthIndex = selectedMonthIndex;
-    
-      // Fetch data with the updated selected_month value and stype
-      getSchedule({ po_id: localStorage.getItem('purchaseId'), selected_month: newMonthIndex }, stype)
-        .then(response => {
-       
-          setCurrentMonthIndex(newMonthIndex);
-    
-          const selectedMonth = month[newMonthIndex];
-          const daterange = selectedMonth ? selectedMonth.daterange : [];
-          const formattedDates = daterange.map((dateString) => {
-            const dateObject = new Date(dateString);
-            return `${dateObject.getDate()}-${dateObject.getMonth() + 1}-${dateObject.getFullYear()}`;
-          });
-          setDateRange(formattedDates);
-        })
-        .catch(error => {
-          console.error('Error fetching data:', error);
-        });
-    };
 
-  
-    
 
-    const handleArrowClick = (e,type) => {
-      e.preventDefault();
-      let newMonthIndex = currentMonthIndex;
-
-      if (type === 'backward' && currentMonthIndex > 0) {
-        newMonthIndex = currentMonthIndex - 1;
-      } else if (type === 'forward' && currentMonthIndex < month.length - 1) {
-        newMonthIndex = currentMonthIndex + 1;
-      }
-    
-      // Fetch data with the updated selected_month value
-      getSchedule({ po_id: localStorage.getItem('purchaseId'), selected_month: newMonthIndex })
-        .then(response => {
-          // Update currentMonthIndex and dateRange states
-          setCurrentMonthIndex(newMonthIndex);
-    
-          const selectedMonth = month[newMonthIndex];
-          const daterange = selectedMonth ? selectedMonth.daterange : [];
-          const formattedDates = daterange.map((dateString) => {
-            const dateObject = new Date(dateString);
-            return `${dateObject.getDate()}-${dateObject.getMonth() + 1}-${dateObject.getFullYear()}`;
-          });
-          setDateRange(formattedDates);
-        })
-        .catch(error => {
-          console.error('Error fetching data:', error);
-        });
-      };
-    
-  
-
-    // Render your component with the fetched data
-    return (
-      <>
-      <Typography
+  return (
+   <>
+     <Typography
         variant='h4'
         gutterBottom
         style={{
@@ -241,7 +239,7 @@ export const Calender = () => {
         //   color: 'white',
 
         }}
-        onClick={() => handleButtonClick('monthly')}
+        onClick={(e) => navigate(`/dashboard/purchase/schedule/monthly`) }
         className='btn-hover'
       >
         <EventNoteIcon style={{ marginRight: '5px' }} />
@@ -273,7 +271,7 @@ export const Calender = () => {
     </div>
     {/* showing data */}
     <div className="d-flex flex-row align-items-center  mt-3" style={{
-        width:'40%'
+        width:'100%'
     }}>
           <Button 
           className='ms-2'
@@ -282,14 +280,14 @@ export const Calender = () => {
             handleArrowClick(e,'backward');
             // navigate(`/dashboard/purchase/schedule/monthly/${currentMonthIndex - 1}`);
           }}
-          disabled={currentMonthIndex <= 0}
+          disabled={currentWeekIndex <= 0}
           >
             <ArrowBackIcon />
           </Button>
-   
-        
-        {month.length > 0 &&
-  month.map((monthItem, index) => (
+{/*    
+          <div style={{ overflowX: 'auto', whiteSpace: 'nowrap' }}>
+        {week.length > 0 &&
+  week.map((weekItem, index) => (
     <div className="container" style={{
       // border:'1px solid red',
       marginLeft:'10px'
@@ -299,15 +297,35 @@ export const Calender = () => {
           onClick={(e) => {
             handleButtonClick(e, index);
           }}
-          className={currentMonthIndex === index ? "activeMonth" : ""}
+          className={currentWeekIndex === index ? "activeWeek" : ""}
           style={{ cursor: 'pointer' }}
         >
-          {monthItem.monthrangeui}
+          {weekItem.weekrangeui}
         </span>
       </Typography>
     </div>
   ))}
- 
+  </div>
+  */}
+  <div style={{ overflowX: 'auto', whiteSpace: 'nowrap', height: '50px' }}>
+  {week.length > 0 &&
+    week.slice(currentWeekIndex, currentWeekIndex + 2).map((weekItem, index) => (
+      <div className="container" style={{ display: 'inline-block', marginLeft: '10px' }} key={index}>
+        <Typography variant="h5" gutterBottom>
+          <span
+            onClick={(e) => {
+              handleButtonClick(e, currentWeekIndex + index);
+            }}
+            className={currentWeekIndex === currentWeekIndex + index ? "activeWeek" : ""}
+            style={{ cursor: 'pointer' }}
+          >
+            {weekItem.weekrangeui}
+          </span>
+        </Typography>
+      </div>
+    ))}
+</div>
+
 
           <Button
           //  onClick={() => handleArrowClick('forward')} 
@@ -319,7 +337,7 @@ export const Calender = () => {
           //   marginRight:'30px',
        
           // }}
-          disabled={currentMonthIndex >= month.length-1}
+          disabled={currentWeekIndex >=week.length-1}
           >
             <ArrowForwardIcon 
            
@@ -402,12 +420,6 @@ export const Calender = () => {
        
     </Card>
     <Footer/>
-    
-
       </>
-    );
-   
-  }
-  // ;Dream Soft ;info@dreamssoftindia.com
-  // mak infotech mubmbai9029075525
-  // 8957060742
+  )
+}

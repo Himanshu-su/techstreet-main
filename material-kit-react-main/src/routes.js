@@ -27,6 +27,7 @@ import { Footer } from './pages/Footer';
 import { Drndetail } from './pages/po/drndetail';
 import { Calender } from './pages/po/calender';
 import { Drnconcern } from './pages/po/drnConcern';
+import { Weeklycalender } from './pages/po/weeklycalender';
 
 
 
@@ -54,6 +55,7 @@ export default function Router() {
         { path: 'delivery', element: <Delivery /> },
         { path: `purchase/product/`, element: <Subpurchase /> },
         { path: `purchase/schedule/monthly`, element: <Calender /> },
+        { path: `purchase/schedule/weekly`, element: <Weeklycalender /> },
         { path: `drnconcern`, element: <Drnconcern /> },
         
         // {
@@ -74,23 +76,23 @@ export default function Router() {
         {
           path: 'purchase/schedule',
           element: <Navigate to="/dashboard/purchase/schedule/monthly" />,
-          children: [
-            {
-              path: 'monthly/:index',
-              element: <Calender />,
-            },
-            {
-              path: 'weekly/:index',
-              element: <Calender />,
-            },
-          ],
+          // children: [
+          //   {
+          //     path: 'monthly/:index',
+          //     element: <Calender />,
+          //   },
+          //   {
+          //     path: 'weekly/:index',
+          //     element: <Calender />,
+          //   },
+          // ],
         },
+      
         
         
         
         
          { path: `profile/DRN/create/`, element: <Drnlist/> },
-        // { path: `subpurchase/:`, element: <Subpurchase /> },
         { path: `subpurchase/drnlist/drn-detail`, element: <Drndetail /> },
         
       
